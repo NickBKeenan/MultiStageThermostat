@@ -8,6 +8,7 @@ MultiStageThermostat::MultiStageThermostat(int p_sensorpin) :sensor(p_sensorpin,
     setStageDelays(0, NULL);
     Stage = 0;
     stageCount = 0;
+    lastTemp = 0;
 
 }
 
@@ -201,7 +202,7 @@ void MultiStageThermostat::onStartingMode()
                 {
                     if (Stage > defaultStage)
                         Stage = defaultStage;
-                    nextAdjustmentTime = millis() + stageDelays[Stage] * 1000;
+                    nextAdjustmentTime = millis() + (unsigned long)stageDelays[Stage] * 1000;
                     startingmode = false;
                 }
                 else
@@ -226,7 +227,8 @@ void MultiStageThermostat::onStartingMode()
                     if (Stage > defaultStage)
                         Stage = defaultStage;
                     startingmode = false;
-                    nextAdjustmentTime = millis() + stageDelays[Stage] * 1000;
+                    nextAdjustmentTime = millis() + (unsigned long)stageDelays[Stage] * 1000;
+
 
                 }
                 else
@@ -268,7 +270,7 @@ void MultiStageThermostat::setup()
 void MultiStageThermostat::OnHitUpperLimit()
 // called when the upper thermostat limit is hit
 {
-    int interval;
+    int interval=0;
     if (mode == MODE_HEAT)
     {
         if (Stage == 0) // don't do anything if we're already off
@@ -290,14 +292,15 @@ void MultiStageThermostat::OnHitUpperLimit()
     // if we're turning fan off, allow another 60 seconds to turn it back on again
     // when you turn the fan speed off, it shuts off the zone valve. When you turn it back on again it takes about 60 seconds for the coil to heat up
 
-    // this needs to be modified to use array of intervals;
-    nextAdjustmentTime = millis() + interval*1000; 
+    
+    nextAdjustmentTime = millis() + (unsigned long)interval*1000;
+
 
 }
 void MultiStageThermostat::OnHitLowerLimit()
 // called when the lower thermostat limit is hit
 {
-    int interval;
+    int interval=0;
     if (mode == MODE_HEAT)
     {
         if (Stage == stageCount - 1)
@@ -319,7 +322,7 @@ void MultiStageThermostat::OnHitLowerLimit()
     }
     // move the threshold down a unit
     lowerthreshold -= thermostatInterval;
-    nextAdjustmentTime = millis() + interval * 1000;
+    nextAdjustmentTime = millis() + (unsigned long)interval * 1000;
 
 }
 

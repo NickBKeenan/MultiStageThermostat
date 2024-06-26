@@ -28,9 +28,8 @@ class MultiStageThermostat
 	float lastTemp;  //Stores temperature value
 	int Stage; // what was returned the last time we checked the temperature
 
-	// settings variables
-	float setTemp;   // temperature setting from the unit
-	int mode; // heating or cooling
+	
+
 	// configurable variables
 	float thermostatInterval; // how much above or below the setpoint to trigger a change of stage
 	int stageCount; // the number of stages. Includes 0, so maximum is stageCount-1
@@ -47,6 +46,9 @@ protected: // these are used for defluttering
 	unsigned long nextAdjustmentTime = 0; //don't adjust the fan speed more than once every three minutes
 	float upperthreshold = 0;  // if we hit this temperature, slow the fan down
 	float lowerthreshold = 0; // if we hit this temperature, speed the fan up
+	// settings variables -- need to be visible for humidity control
+	int mode; // heating or cooling
+	float setTemp;   // temperature setting from the unit
 public:
 	MultiStageThermostat(int p_sensorPin);
 	void setup();
