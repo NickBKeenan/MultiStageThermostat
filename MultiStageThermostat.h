@@ -8,7 +8,7 @@
 #define MODE_MANUAL 2
 #define MODE_COOL -1
 #define MODE_OFF 0
-#define MODE_FLOOR 3
+
 
 struct Settings {
 	int mode;

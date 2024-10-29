@@ -188,7 +188,7 @@ void MultiStageThermostat::onStartingMode()
         upperthreshold = setTemp + thermostatInterval;
         lowerthreshold = setTemp - thermostatInterval;
         // if we're outside the thermostat band, set to off or highest. Otherwise do nothing, just keep doing what you're doing
-        if (mode == MODE_HEAT)
+        if (mode == MODE_HEAT  )
         {
             if (lastTemp >= upperthreshold) {
 
