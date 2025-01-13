@@ -338,6 +338,11 @@ int MultiStageThermostat::getLastStage()
 {
     return Stage;
 }
+void MultiStageThermostat::setLastStage(int newstage)
+{
+    Stage = newstage;
+};
+
 float MultiStageThermostat::CtoF(float inC)
 {
     float retval;

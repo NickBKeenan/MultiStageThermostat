@@ -63,7 +63,7 @@ public:
 	char* getLongStatus();
 	int getStage();
 	int getLastStage();
-
+	void setLastStage(int newstage);
 	float CtoF(float Cin);
 	float FtoC(float Fin);
 	void setThermostatInterval(float interval);
